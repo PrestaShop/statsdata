@@ -33,7 +33,7 @@ class StatsData extends Module
 	{
 		$this->name = 'statsdata';
 		$this->tab = 'analytics_stats';
-		$this->version = 1.2;
+		$this->version = '1.3';
 		$this->author = 'PrestaShop';
 		$this->need_instance = 0;
 
@@ -42,7 +42,7 @@ class StatsData extends Module
 
 		$this->displayName = $this->l('Data mining for statistics');
 		$this->description = $this->l('This module must be enabled if you want to use statistics.');
-		$this->ps_versions_compliancy = array('min' => '1.5.6.1', 'max' => _PS_VERSION_);
+		$this->ps_versions_compliancy = array('min' => '1.6', 'max' => _PS_VERSION_);
 	}
 
 	public function install()
