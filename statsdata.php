@@ -47,7 +47,15 @@ class StatsData extends Module
 
 	public function install()
 	{
-		return (parent::install() && $this->registerHook('footer') && $this->registerHook('authentication') && $this->registerHook('createAccount'));
+        if (_PS_VERSION_ >= 1.7) {
+            $hookFooter = 'displayBeforeBodyClosingTag';
+        } else {
+            $hookFooter = 'footer';
+        }
+		return (parent::install()
+            && $this->registerHook($hookFooter)
+            && $this->registerHook('authentication')
+            && $this->registerHook('createAccount'));
 	}
 
 	public function getContent()
@@ -68,17 +76,44 @@ class StatsData extends Module
 
 	public function hookFooter($params)
 	{
-		$html = '';
-		if (!isset($params['cookie']->id_guest))
-		{
-			Guest::setNewGuest($params['cookie']);
+		if (_PS_VERSION_ < 1.7) {
+            $script_content_plugins = $this->getScriptPlugins($params);
+            $script_content_pages_views = $this->getScriptCustomerPagesViews($params);
 
-			if (Configuration::get('PS_STATSDATA_PLUGINS'))
-			{
-				$this->context->controller->addJS($this->_path.'js/plugindetect.js');
-				$token = sha1($params['cookie']->id_guest._COOKIE_KEY_);
-				$html .= '
-				<script type="text/javascript">
+            return $script_content_plugins . $script_content_pages_views;
+        }
+
+		return false;
+	}
+
+	public function hookDisplayBeforeBodyClosingTag($params)
+    {
+        if (_PS_VERSION_ >= 1.7) {
+            $script_content_plugins = $this->getScriptPlugins($params);
+            $script_content_pages_views = $this->getScriptCustomerPagesViews($params);
+
+            return $script_content_plugins . $script_content_pages_views;
+        }
+
+        return false;
+    }
+
+    private function getScriptPlugins($params)
+    {
+        if (!isset($params['cookie']->id_guest))
+        {
+            Guest::setNewGuest($params['cookie']);
+
+            if (Configuration::get('PS_STATSDATA_PLUGINS'))
+            {
+                if (_PS_VERSION_ >= 1.7) {
+                    $this->context->controller->registerJavascript('modules-plugindetect', 'modules/'.$this->name.'/js/plugindetect.js', ['position' => 'bottom', 'priority' => 150]);
+                } else {
+                    $this->context->controller->addJS($this->_path.'js/plugindetect.js');
+                }
+
+                $token = sha1($params['cookie']->id_guest._COOKIE_KEY_);
+				return '<script type="text/javascript">
 					$(document).ready(function() {
 						plugins = new Object;
 						plugins.adobe_director = (PluginDetect.getVersion("Shockwave") != null) ? 1 : 0;
@@ -97,20 +132,25 @@ class StatsData extends Module
 						$.post("'.Context::getContext()->link->getPageLink('statistics', (bool)(Tools::getShopProtocol() == 'https://')).'", navinfo);
 					});
 				</script>';
-			}
-		}
+            }
+        }
 
-		// Record the guest path then increment the visit counter of the page
-		$token_array = Connection::setPageConnection($params['cookie']);
-		ConnectionsSource::logHttpReferer();
-		if (Configuration::get('PS_STATSDATA_PAGESVIEWS'))
-			Page::setPageViewed($token_array['id_page']);
+        return '';
+    }
 
-		if (Configuration::get('PS_STATSDATA_CUSTOMER_PAGESVIEWS'))
-		{
-			// Ajax request sending the time spend on the page
-			$token = sha1($token_array['id_connections'].$token_array['id_page'].$token_array['time_start']._COOKIE_KEY_);
-			$html .= '
+    private function getScriptCustomerPagesViews($params)
+    {
+        // Record the guest path then increment the visit counter of the page
+        $token_array = Connection::setPageConnection($params['cookie']);
+        ConnectionsSource::logHttpReferer();
+        if (Configuration::get('PS_STATSDATA_PAGESVIEWS'))
+            Page::setPageViewed($token_array['id_page']);
+
+        if (Configuration::get('PS_STATSDATA_CUSTOMER_PAGESVIEWS'))
+        {
+            // Ajax request sending the time spend on the page
+            $token = sha1($token_array['id_connections'].$token_array['id_page'].$token_array['time_start']._COOKIE_KEY_);
+            return '
 			<script type="text/javascript">
 				var time_start;
 				$(window).load(
@@ -132,10 +172,10 @@ class StatsData extends Module
 					}
 				);
 			</script>';
-		}
+        }
 
-		return $html;
-	}
+        return '';
+    }
 
 	public function hookCreateAccount($params)
 	{
