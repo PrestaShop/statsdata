@@ -28,7 +28,7 @@ if (!defined('_PS_VERSION_')) {
     exit;
 }
 
-class StatsData extends Module
+class statsdata extends Module
 {
     public function __construct()
     {
