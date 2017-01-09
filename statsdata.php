@@ -34,16 +34,16 @@ class statsdata extends Module
     {
         $this->name = 'statsdata';
         $this->tab = 'analytics_stats';
-        $this->version = '1.6.2';
+        $this->version = '2.0.0';
         $this->author = 'PrestaShop';
         $this->need_instance = 0;
 
         $this->bootstrap = true;
         parent::__construct();
 
-        $this->displayName = $this->l('Data mining for statistics');
-        $this->description = $this->l('This module must be enabled if you want to use statistics.');
-        $this->ps_versions_compliancy = array('min' => '1.6', 'max' => '1.7.0.99');
+        $this->displayName = $this->trans('Data mining for statistics', array(), 'Modules.Statsdata.Admin');
+        $this->description = $this->trans('This module must be enabled if you want to use statistics.', array(), 'Modules.Statsdata.Admin');
+        $this->ps_versions_compliancy = array('min' => '1.7.0.0', 'max' => _PS_VERSION_);
     }
 
     public function install()
@@ -61,7 +61,7 @@ class statsdata extends Module
             Configuration::updateValue('PS_STATSDATA_CUSTOMER_PAGESVIEWS', (int)Tools::getValue('PS_STATSDATA_CUSTOMER_PAGESVIEWS'));
             Configuration::updateValue('PS_STATSDATA_PAGESVIEWS', (int)Tools::getValue('PS_STATSDATA_PAGESVIEWS'));
             Configuration::updateValue('PS_STATSDATA_PLUGINS', (int)Tools::getValue('PS_STATSDATA_PLUGINS'));
-            $html .= $this->displayConfirmation($this->l('Configuration updated'));
+            $html .= $this->displayConfirmation($this->trans('Settings updated', array(), 'Admin.Global'));
         }
 
         $html .= $this->renderForm();
@@ -180,67 +180,67 @@ class statsdata extends Module
         $fields_form = array(
             'form' => array(
                 'legend' => array(
-                    'title' => $this->l('Settings'),
+                    'title' => $this->trans('Settings', array(), 'Admin.Global'),
                     'icon' => 'icon-cogs'
                 ),
                 'input' => array(
                     array(
                         'type' => 'switch',
-                        'label' => $this->l('Save page views for each customer'),
+                        'label' => $this->trans('Save page views for each customer', array(), 'Modules.Statsdata.Admin'),
                         'name' => 'PS_STATSDATA_CUSTOMER_PAGESVIEWS',
-                        'desc' => $this->l('Storing customer page views uses a lot of CPU resources and database space. Only enable if your server can handle it.'),
+                        'desc' => $this->trans('Storing customer page views uses a lot of CPU resources and database space. Only enable if your server can handle it.', array(), 'Modules.Statsdata.Admin'),
                         'values' => array(
                             array(
                                 'id' => 'active_on',
                                 'value' => 1,
-                                'label' => $this->l('Enabled')
+                                'label' => $this->trans('Enabled', array(), 'Admin.Global')
                             ),
                             array(
                                 'id' => 'active_off',
                                 'value' => 0,
-                                'label' => $this->l('Disabled')
+                                'label' => $this->trans('Disabled', array(), 'Admin.Global')
                             )
                         ),
                     ),
                     array(
                         'type' => 'switch',
-                        'label' => $this->l('Save global page views'),
+                        'label' => $this->trans('Save global page views', array(), 'Modules.Statsdata.Admin'),
                         'name' => 'PS_STATSDATA_PAGESVIEWS',
-                        'desc' => $this->l('Global page views uses fewer resources than customer\'s, but it uses resources nonetheless.'),
+                        'desc' => $this->trans('Global page views uses fewer resources than customer\'s, but it uses resources nonetheless.', array(), 'Modules.Statsdata.Admin'),
                         'values' => array(
                             array(
                                 'id' => 'active_on',
                                 'value' => 1,
-                                'label' => $this->l('Enabled')
+                                'label' => $this->trans('Enabled', array(), 'Admin.Global')
                             ),
                             array(
                                 'id' => 'active_off',
                                 'value' => 0,
-                                'label' => $this->l('Disabled')
+                                'label' => $this->trans('Disabled', array(), 'Admin.Global')
                             )
                         ),
                     ),
                     array(
                         'type' => 'switch',
-                        'label' => $this->l('Plugins detection'),
+                        'label' => $this->trans('Plugins detection', array(), 'Modules.Statsdata.Admin'),
                         'name' => 'PS_STATSDATA_PLUGINS',
-                        'desc' => $this->l('Plugins detection loads an extra 20 kb JavaScript file once for new visitors.'),
+                        'desc' => $this->trans('Plugins detection loads an extra 20 kb JavaScript file once for new visitors.', array(), 'Modules.Statsdata.Admin'),
                         'values' => array(
                             array(
                                 'id' => 'active_on',
                                 'value' => 1,
-                                'label' => $this->l('Enabled')
+                                'label' => $this->trans('Enabled', array(), 'Admin.Global')
                             ),
                             array(
                                 'id' => 'active_off',
                                 'value' => 0,
-                                'label' => $this->l('Disabled')
+                                'label' => $this->trans('Disabled', array(), 'Admin.Global')
                             )
                         ),
                     )
                 ),
                 'submit' => array(
-                    'title' => $this->l('Save'),
+                    'title' => $this->trans('Save', array(), 'Admin.Actions'),
                 )
             ),
         );
