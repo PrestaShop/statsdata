@@ -1,19 +1,20 @@
 {
-  "name": "prestashop/statsdata",
-  "description": "PrestaShop module statsdata",
-  "homepage": "https://github.com/PrestaShop/statsdata",
-  "license": "AFL - Academic Free License (AFL 3.0)",
-  "authors": [
-    {
-      "name": "PrestaShop SA",
-      "email": "contact@prestashop.com"
-    }
-  ],
-  "require": {
-    "php": ">=5.4"
-  },
-  "config": {
-    "preferred-install": "dist"
-  },
-  "type": "prestashop-module"
+    "name": "prestashop/statsdata",
+    "description": "PrestaShop module statsdata",
+    "homepage": "https://github.com/PrestaShop/statsdata",
+    "license": "AFL-3.0",
+    "authors": [
+        {
+            "name": "PrestaShop SA",
+            "email": "contact@prestashop.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4"
+    },
+    "config": {
+        "preferred-install": "dist"
+    },
+    "type": "prestashop-module",
+    "author": "PrestaShop"
 }
