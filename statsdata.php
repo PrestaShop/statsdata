@@ -169,7 +169,11 @@ class statsdata extends Module
             $params['cookie']->id_guest = $guest->id;
         } else {
             // The guest is duplicated if it has multiple customer accounts
-            $method = ($guest->id_customer) ? 'add' : 'update';
+            $method = 'update';
+            if ($guest->id_customer) {
+                $method = 'add';
+                $guest->id = null;
+            }
             $guest->id_customer = $params['cookie']->id_customer;
             $guest->{$method}();
         }
