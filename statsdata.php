@@ -274,4 +274,12 @@ class statsdata extends Module
             'PS_STATSDATA_PLUGINS' => Tools::getValue('PS_STATSDATA_PLUGINS', Configuration::get('PS_STATSDATA_PLUGINS')),
         );
     }
+    
+    /**
+     * Avoid error message in web server log => http://forge.prestashop.com/browse/BOOM-4826
+     * @return null
+     */
+    public function display() {
+        return null;
+    }
 }
