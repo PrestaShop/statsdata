@@ -42,7 +42,7 @@ class statsdata extends Module
         parent::__construct();
 
         $this->displayName = $this->trans('Data mining for statistics', array(), 'Modules.Statsdata.Admin');
-        $this->description = $this->trans('This module must be enabled if you want to use statistics.', array(), 'Modules.Statsdata.Admin');
+        $this->description = $this->trans('Collect as much information as possible to enrich your stats and run your business further.', array(), 'Modules.Statsdata.Admin');
         $this->ps_versions_compliancy = array('min' => '1.7.1.0', 'max' => _PS_VERSION_);
     }
 

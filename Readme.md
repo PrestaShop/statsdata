@@ -2,7 +2,7 @@
 
 ## About
 
-This module must be enabled if you want to use statistics.
+Collect as much information as possible to enrich your stats and run your business further.
 
 ## Reporting issues
 
