@@ -102,6 +102,7 @@ class statsdata extends Module
 						navinfo.type = "navinfo";
 						navinfo.id_guest = "' . (int) $params['cookie']->id_guest . '";
 						navinfo.token = "' . $token . '";
+						navinfo.ajax = "1";
 						$.post("' . Context::getContext()->link->getPageLink('statistics', (bool) (Tools::getShopProtocol() == 'https://')) . '", navinfo);
 					});
 				</script>';
@@ -141,6 +142,7 @@ class statsdata extends Module
 						pagetime.time_start = "' . $token_array['time_start'] . '";
 						pagetime.token = "' . $token . '";
 						pagetime.time = time_end-time_start;
+						pagetime.ajax = "1";
 						$.post("' . Context::getContext()->link->getPageLink('statistics', (bool) (Tools::getShopProtocol() == 'https://')) . '", pagetime);
 					}
 				);
