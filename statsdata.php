@@ -135,15 +135,15 @@ class statsdata extends Module
 				$(window).unload(
 					function() {
 						var time_end = new Date();
-						var pagetime = new Object;
-						pagetime.type = "pagetime";
-						pagetime.id_connections = "' . (int) $token_array['id_connections'] . '";
-						pagetime.id_page = "' . (int) $token_array['id_page'] . '";
-						pagetime.time_start = "' . $token_array['time_start'] . '";
-						pagetime.token = "' . $token . '";
-						pagetime.time = time_end-time_start;
-						pagetime.ajax = "1";
-						$.post("' . Context::getContext()->link->getPageLink('statistics', (bool) (Tools::getShopProtocol() == 'https://')) . '", pagetime);
+                        var pagetime = new FormData();
+                        pagetime.append("type", "pagetime");
+                        pagetime.append("id_connections", "'.(int)$token_array['id_connections'].'");
+                        pagetime.append("id_page", "'.(int)$token_array['id_page'].'");
+                        pagetime.append("time_start", "'.$token_array['time_start'].'");
+                        pagetime.append("token", "'.$token.'");
+                        pagetime.append("time", time_end-time_start);
+                        pagetime.append("ajax", "1");
+                        navigator.sendBeacon("'.Context::getContext()->link->getPageLink('statistics', (bool)(Tools::getShopProtocol() == 'https://')).'", pagetime);
 					}
 				);
 			</script>';
