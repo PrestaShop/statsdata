@@ -50,7 +50,7 @@ class statsdata extends Module
     {
         return (parent::install()
             && $this->registerHook('displayBeforeBodyClosingTag')
-            && $this->registerHook('authentication')
+            && $this->registerHook('actionAuthentication')
             && $this->registerHook('createAccount'));
     }
 
@@ -151,10 +151,10 @@ class statsdata extends Module
 
     public function hookCreateAccount($params)
     {
-        return $this->hookAuthentication($params);
+        return $this->hookActionAuthentication($params);
     }
 
-    public function hookAuthentication($params)
+    public function hookActionAuthentication($params)
     {
         // Update or merge the guest with the customer id (login and account creation)
         $guest = new Guest($params['cookie']->id_guest);
