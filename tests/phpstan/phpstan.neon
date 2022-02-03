@@ -3,6 +3,6 @@ includes:
 parameters:
   paths:
     # From PHPStan 0.12, paths to check are relative to the neon file
-    - ../../statscheckup.php
+    - ../../statsdata.php
     - ../../upgrade/
   level: 5

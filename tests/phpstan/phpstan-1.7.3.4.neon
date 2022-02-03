@@ -3,3 +3,4 @@ includes:
 
 parameters:
   ignoreErrors:
+    - '#Property ObjectModelCore::\$id \(int\) does not accept null.#'
