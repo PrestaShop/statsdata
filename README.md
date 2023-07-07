@@ -4,6 +4,10 @@
 
 Collect as much information as possible to enrich your stats and run your business further.
 
+## Compatibility
+
+PrestaShop: `1.7.1.0` or later
+
 ## Reporting issues
 
 You can report issues with this module in the main PrestaShop repository. [Click here to report an issue][report-issue]. 
