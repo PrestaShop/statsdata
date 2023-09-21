@@ -50,7 +50,7 @@ class statsdata extends Module
         return parent::install()
             && $this->registerHook('displayBeforeBodyClosingTag')
             && $this->registerHook('actionAuthentication')
-            && $this->registerHook('createAccount');
+            && $this->registerHook('actionCustomerAccountAdd');
     }
 
     public function getContent()
@@ -148,7 +148,7 @@ class statsdata extends Module
         return '';
     }
 
-    public function hookCreateAccount($params)
+    public function hookActionCustomerAccountAdd($params)
     {
         return $this->hookActionAuthentication($params);
     }
