@@ -10,13 +10,13 @@ PrestaShop: `1.7.1.0` or later
 
 ## How to test
 
-Link to specs : https://docs.prestashop-project.org/functional-documentation/functional-documentation/ux-ui/back-office/improve/modules/category-tree-links-ps_categorytree?q=statsdata
+Link to specs: https://docs.prestashop-project.org/functional-documentation/functional-documentation/ux-ui/back-office/improve/modules/category-tree-links-ps_categorytree?q=statsdata
 
-Link to test scenario : https://build.prestashop-project.org/test-scenarios/scenarios/modules/statsdata.html
+Link to test scenario: https://build.prestashop-project.org/test-scenarios/scenarios/modules/statsdata.html
 
 This module is is used for the statistics gathering.  
 
-In BO > Modules configure the module statsdata >  Enable / Disable the options :  Save page views for each customer / Save global page views / Plugins detection, Check that all the statistics are gathered .
+In `BO > Modules`, configure the module statsdata and these options - Save page views for each customer / Save global page views / Plugins detection. Check that all the statistics are gathered.
 
 ## Reporting issues
 
