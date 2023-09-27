@@ -42,7 +42,7 @@ class statsdata extends Module
 
         $this->displayName = $this->trans('Data mining for statistics', [], 'Modules.Statsdata.Admin');
         $this->description = $this->trans('Collect as much information as possible to enrich your stats and run your business further.', [], 'Modules.Statsdata.Admin');
-        $this->ps_versions_compliancy = ['min' => '1.7.1.0', 'max' => _PS_VERSION_];
+        $this->ps_versions_compliancy = ['min' => '1.7.8.10', 'max' => _PS_VERSION_];
     }
 
     public function install()
