@@ -33,7 +33,7 @@ class statsdata extends Module
     {
         $this->name = 'statsdata';
         $this->tab = 'administration';
-        $this->version = '2.1.1';
+        $this->version = '2.1.2';
         $this->author = 'PrestaShop';
         $this->need_instance = 0;
 
@@ -50,7 +50,7 @@ class statsdata extends Module
         return parent::install()
             && $this->registerHook('displayBeforeBodyClosingTag')
             && $this->registerHook('actionAuthentication')
-            && $this->registerHook('createAccount');
+            && $this->registerHook('actionCustomerAccountAdd');
     }
 
     public function getContent()
@@ -148,7 +148,7 @@ class statsdata extends Module
         return '';
     }
 
-    public function hookCreateAccount($params)
+    public function hookActionCustomerAccountAdd($params)
     {
         return $this->hookActionAuthentication($params);
     }
