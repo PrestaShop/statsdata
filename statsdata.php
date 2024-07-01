@@ -232,12 +232,12 @@ class statsdata extends Module
                             [
                                 'id' => 'active_on',
                                 'value' => 1,
-                                'label' => $this->trans('Enabled', [], 'Admin.Global'),
+                                'label' => $this->trans('Yes', [], 'Admin.Global'),
                             ],
                             [
                                 'id' => 'active_off',
                                 'value' => 0,
-                                'label' => $this->trans('Disabled', [], 'Admin.Global'),
+                                'label' => $this->trans('No', [], 'Admin.Global'),
                             ],
                         ],
                     ],
