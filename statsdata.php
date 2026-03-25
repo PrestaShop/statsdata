@@ -157,6 +157,10 @@ class statsdata extends Module
     {
         // Update or merge the guest with the customer id (login and account creation)
         $guest = new Guest($params['cookie']->id_guest);
+        //Sometimes the id_guest in the cookie is empty / invalid or old here (it has been deleted already), so we should interrupt here in that case
+        if (!Validate::isLoadedObject($guest)){
+            return;
+        }
         $result = Db::getInstance()->getRow('
 		SELECT `id_guest`
 		FROM `' . _DB_PREFIX_ . 'guest`
