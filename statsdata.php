@@ -33,7 +33,7 @@ class statsdata extends Module
     {
         $this->name = 'statsdata';
         $this->tab = 'administration';
-        $this->version = '2.1.2';
+        $this->version = '2.1.3';
         $this->author = 'PrestaShop';
         $this->need_instance = 0;
 
@@ -48,6 +48,7 @@ class statsdata extends Module
     public function install()
     {
         return parent::install()
+            && $this->registerHook('displayHeader')
             && $this->registerHook('displayBeforeBodyClosingTag')
             && $this->registerHook('actionAuthentication')
             && $this->registerHook('actionCustomerAccountAdd');
@@ -68,6 +69,13 @@ class statsdata extends Module
         return $html;
     }
 
+    public function hookDisplayHeader()
+    {
+        if (Configuration::get('PS_STATSDATA_PLUGINS')) {
+            $this->context->controller->registerJavascript('modules-plugindetect', 'modules/' . $this->name . '/js/plugindetect.js', ['position' => 'bottom', 'priority' => 150]);
+        }
+    }
+
     public function hookDisplayBeforeBodyClosingTag($params)
     {
         $script_content_plugins = $this->getScriptPlugins($params);
@@ -82,8 +90,6 @@ class statsdata extends Module
             Guest::setNewGuest($params['cookie']);
 
             if (Configuration::get('PS_STATSDATA_PLUGINS')) {
-                $this->context->controller->registerJavascript('modules-plugindetect', 'modules/' . $this->name . '/js/plugindetect.js', ['position' => 'bottom', 'priority' => 150]);
-
                 $token = sha1($params['cookie']->id_guest . _COOKIE_KEY_);
 
                 return '<script type="text/javascript">
