@@ -3,3 +3,4 @@ includes:
 
 parameters:
   ignoreErrors:
+    - '#Call to an undefined static method Connection::isBot\(\)\.#'

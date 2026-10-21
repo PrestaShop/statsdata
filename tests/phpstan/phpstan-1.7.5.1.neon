@@ -3,4 +3,5 @@ includes:
 
 parameters:
   ignoreErrors:
+    - '#Call to an undefined static method Connection::isBot\(\)\.#'
     - '#Property ObjectModelCore::\$id \(int\) does not accept null.#'

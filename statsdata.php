@@ -70,6 +70,10 @@ class statsdata extends Module
 
     public function hookDisplayBeforeBodyClosingTag($params)
     {
+        if (method_exists('Connection', 'isBot') && Connection::isBot()) {
+            return '';
+        }
+
         $script_content_plugins = $this->getScriptPlugins($params);
         $script_content_pages_views = $this->getScriptCustomerPagesViews($params);
 
