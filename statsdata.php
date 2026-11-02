@@ -130,7 +130,7 @@ class statsdata extends Module
 				$(window).on("load", function (e) {
 					time_start = new Date();
 				});
-				$(window).on("unload", function (e) {
+				$(window).on("pagehide", function (e) {
 					var time_end = new Date();
 					var pagetime = new FormData();
 					pagetime.append("type", "pagetime");
